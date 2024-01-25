@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#by Germán Conde Sánchez
+
 #Instalacion tomcat
 # Actualizar el sistema
 apt update -y
@@ -66,13 +68,15 @@ WantedBy=multi-user.target
 EOF
 
 
-# Obtener la ruta de instalación de Java 1.17.0
-JAVA_PATH=$(sudo update-java-alternatives -l | grep '1.17.0' | awk '{print $3}')
+# Obtener la ruta de instalación de Java 1.18.0
+JAVA_PATH=$(sudo update-java-alternatives -l | grep '1.18.0' | awk '{print $3}')
 
 # Reemplazar JAVA_HOME en tomcat.service
-sudo sed -i "s|JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64|JAVA_HOME=$JAVA_PATH|g" /etc/systemd/system/tomcat.service
+sudo sed -i "s|JAVA_HOME=/usr/lib/jvm/java-1.18.0-openjdk-amd64|JAVA_HOME=$JAVA_PATH|g" /etc/systemd/system/tomcat.service
 
 # Recargar servicios systemd y habilitar Apache Tomcat
 sudo systemctl daemon-reload
 sudo systemctl start tomcat
 sudo systemctl enable tomcat
+
+#by Germán Conde Sánchez
